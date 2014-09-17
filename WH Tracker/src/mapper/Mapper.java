@@ -15,18 +15,21 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 public class Mapper {
-	private HashMap<String, system> systems;
+	private HashMap<String, Solarsystem> systems;
 	private GUI gui;
 
 	public Mapper() {
 		gui = new GUI(this);
 		load();
-		gui.show();
+		gui.show();//FIXME This should be good to remove
 	}
 
-	// TODO Add delete
-	// TODO add find
-	void save(String filename, String contents) {
+	/**
+	 * Used to save a file to filename
+	 * @param filename File to save to
+	 * @param contents Contents of the list that are getting saved
+	 */
+	protected void save(String filename, String contents) {
 		File out = new File("./saves/" + filename + ".txt");
 		BufferedWriter writer;
 		try {
@@ -42,12 +45,17 @@ public class Mapper {
 			e.printStackTrace();
 		}
 	}
-
-	void add(String s) throws InvalidSystemException {
+	/**
+	 * Adds a string to the list after retriving all the relevent info.
+	 * @param s
+	 * @throws InvalidSystemException
+	 */
+	protected void add(String s) throws InvalidSystemException {
 		if (s.equals("clear")) {
 			clearSave();
 			return;
 		}
+		//Get the current date/time in eve time
 		DateTimeFormatter dateFormat = DateTimeFormat
 				.forPattern("yyyy/MM/dd HH:mm:ss");
 		DateTime now = new DateTime(DateTimeZone.UTC);
@@ -56,14 +64,16 @@ public class Mapper {
 		values[1] = s;
 		if (!systems.containsKey(s))
 			throw new InvalidSystemException("No Such System" + s);
-		system sys = systems.get(s);
+		Solarsystem sys = systems.get(s);
 		values[2] = Long.toString((sys.getID()));
 		values[3] = Long.toString(sys.getCon().getID());
 		values[4] = Long.toString(sys.getRegion().getID());
 		gui.append(values);
 		write(values);
 	}
-
+	/**
+	 * Clears the save file
+	 */
 	private void clearSave() {
 		File out = new File("./saves/Save.txt");
 		BufferedWriter writer;
@@ -77,7 +87,10 @@ public class Mapper {
 		}
 		gui.clear();
 	}
-
+	/**
+	 * Writes the current data to autosave file
+	 * @param towrite
+	 */
 	private void write(String[] towrite) {
 		File out = new File("./saves/Save.txt");
 		String contents = "";
@@ -108,6 +121,9 @@ public class Mapper {
 		}
 
 	}
+	/**
+	 * Loads all data at the start of the program
+	 */
 	private void load() {
 		Loader l = new Loader();
 		gui.append(l.load());
@@ -115,13 +131,18 @@ public class Mapper {
 		l.loadCons();
 		systems = l.loadSystems();
 	}
-
-	public String[] find(String string)throws InvalidSystemException {
+	/**
+	 * Used to get the data for the find request from the GUI
+	 * @param string
+	 * @return
+	 * @throws InvalidSystemException
+	 */
+	protected String[] find(String string)throws InvalidSystemException {
 		String[] values = new String[4];
 		values[0] = string;
 		if (!systems.containsKey(string))
 			throw new InvalidSystemException("No Such System" + string);
-		system sys = systems.get(string);
+		Solarsystem sys = systems.get(string);
 		values[1] = Long.toString((sys.getID()));
 		values[2] = Long.toString(sys.getCon().getID());
 		values[3] = Long.toString(sys.getRegion().getID());

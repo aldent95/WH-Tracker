@@ -1,17 +1,13 @@
 package mapper;
 
-/**
- * Class to store data for a constellation.
- * @author Alex Dent
- *
- */
-//TODO Can this be class be removed?
-public class Constellation {
+public class Solarsystem {
 	private final Region region;
+	private final Constellation con;
 	private final long ID;
 	private final String name;
-	public Constellation(Region r, long i, String n){
-		region = r;
+	public Solarsystem(Region r, Constellation c, long i, String n){
+		region  =r;
+		con = c;
 		ID = i;
 		name = n;
 	}
@@ -20,6 +16,12 @@ public class Constellation {
 	 */
 	Region getRegion() {
 		return region;
+	}
+	/**
+	 * @return the con
+	 */
+	Constellation getCon() {
+		return con;
 	}
 	/**
 	 * @return the iD
@@ -33,5 +35,5 @@ public class Constellation {
 	String getName() {
 		return name;
 	}
-
+	
 }

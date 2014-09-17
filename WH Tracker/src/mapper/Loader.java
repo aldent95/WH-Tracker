@@ -7,12 +7,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-
+//TODO Look into a total redo of this
+//This is really a mess. Ill comment what I can but it does need a cleanup
 public class Loader {
 	private HashMap<Long, Region> regions = new HashMap<Long, Region>();
 	private HashMap<Long, Constellation> constellations = new HashMap<Long, Constellation>();
-	private HashMap<String, system> systems = new HashMap<String, system>();
-
+	private HashMap<String, Solarsystem> systems = new HashMap<String, Solarsystem>();
+	/**
+	 * Starts the initial load
+	 * @return Returns the contents of the save file.
+	 */
 	String load() {
 		File in = new File("./saves/Save.txt");
 		String contents = "";
@@ -31,7 +35,10 @@ public class Loader {
 		return (contents);
 
 	}
-
+	/**
+	 * Loads all the regions from file
+	 * @return
+	 */
 	HashMap<Long, Region> loadRegions() {
 		InputStream file = getClass().getResourceAsStream(
 				"/files/WHRegions.txt");
@@ -56,7 +63,10 @@ public class Loader {
 		return regions;
 
 	}
-
+	/**
+	 * Loads all the Constellations from file
+	 * @return
+	 */
 	HashMap<Long, Constellation> loadCons() {
 		InputStream file = getClass().getResourceAsStream(
 				"/files/WHConstellations.txt");
@@ -82,8 +92,11 @@ public class Loader {
 		}
 		return constellations;
 	}
-
-	HashMap<String, system> loadSystems() {
+	/**
+	 * Loads all the Systems from file
+	 * @return
+	 */
+	HashMap<String, Solarsystem> loadSystems() {
 		InputStream file = getClass().getResourceAsStream(
 				"/files/WHSystems.txt");
 		BufferedReader data;
@@ -97,7 +110,7 @@ public class Loader {
 				String[] values = line.split("\t");
 				long region = Long.parseLong(values[0]);
 				long con = Long.parseLong(values[1]);
-				system s = new system(regions.get(region),
+				Solarsystem s = new Solarsystem(regions.get(region),
 						constellations.get(con), Long.parseLong(values[2]),
 						values[3]);
 				systems.put(values[3], s);
