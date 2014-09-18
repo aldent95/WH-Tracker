@@ -22,8 +22,7 @@ public class GUI {
 	private JTextField textField;
 	private String tempText;
 	// TODO Rename
-	private boolean errored = false; // Tracks if we are currently in an error
-										// state
+	private boolean stdDisplay = true; //Tracks if we are currently in the standard display mode.
 	private String header = "Date/Time\t\tJ Number\tSystem RealID\t\tConstellation RealID\tRegion RealID\n";
 	Mapper m;
 	
@@ -123,7 +122,7 @@ public class GUI {
 		textArea = new JTextArea();
 		textArea.setText(header);
 		frame.getContentPane().add(textArea, BorderLayout.CENTER);
-
+		frame.setVisible(true);
 	}
 
 	/**
@@ -132,9 +131,9 @@ public class GUI {
 	 * @param values
 	 */
 	protected void find(String[] values) {
-		if (!errored) {
+		if (stdDisplay) {
 			tempText = textArea.getText();
-			errored = true;
+			stdDisplay = false;
 		}
 		// TODO Make a method for this
 		String line = values[0] + "\t" + values[1] + "\t" + values[2] + "\t\t"
@@ -147,8 +146,8 @@ public class GUI {
 	 * Deletes the last entry on the list
 	 */
 	protected void delete() {
-		if (errored) {
-			errored = false;
+		if (!stdDisplay) {
+			stdDisplay = true;
 			textArea.setText(tempText);
 		}
 		// To remove the last entry we get the current lines, then redisplay the
@@ -173,8 +172,8 @@ public class GUI {
 	 * @param values
 	 */
 	protected void append(String[] values) {
-		if (errored) {
-			errored = false;
+		if (!stdDisplay) {
+			stdDisplay = true;
 			textArea.setText(tempText);
 		}
 		String[] lines = textArea.getText().split("\\n");
@@ -190,7 +189,7 @@ public class GUI {
 	protected void error(InvalidSystemException e) {
 		tempText = textArea.getText();
 		textArea.setText(e + "");
-		errored = true;
+		stdDisplay = false;
 
 	}
 
@@ -198,13 +197,6 @@ public class GUI {
 		textArea.append(contents);
 
 	}
-
-	// TODO Can this be removed?
-	protected void show() {
-		frame.setVisible(true);
-
-	}
-
 	protected void clear() {
 		textArea.setText(header);
 

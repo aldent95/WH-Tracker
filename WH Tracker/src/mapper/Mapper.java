@@ -21,7 +21,6 @@ public class Mapper {
 	public Mapper() {
 		gui = new GUI(this);
 		load();
-		gui.show();//FIXME This should be good to remove
 	}
 
 	/**
