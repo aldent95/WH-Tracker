@@ -26,9 +26,8 @@ public class GUI {
 										// state
 	private String header = "Date/Time\t\tJ Number\tSystem RealID\t\tConstellation RealID\tRegion RealID\n";
 	Mapper m;
-	private JButton btnDeleteLast;// FIXME Are these 3 fields really needed?
-	private JButton btnFind;
-	private JButton btnAdd_1;
+	
+	
 
 	/**
 	 * Protected class that manages the GUI for the program
@@ -77,7 +76,7 @@ public class GUI {
 		});
 		panel.add(btnAdd);
 		// Setup the save button
-		btnAdd_1 = new JButton("Save");
+		JButton btnAdd_1 = new JButton("Save");
 		btnAdd_1.setForeground(Color.BLACK);
 		btnAdd_1.setBackground(Color.BLUE);
 		btnAdd_1.addActionListener(new ActionListener() {
@@ -95,7 +94,7 @@ public class GUI {
 		});
 		panel.add(btnAdd_1);
 		// Setup the delete button
-		btnDeleteLast = new JButton("Delete Last");
+		JButton btnDeleteLast = new JButton("Delete Last");
 		btnDeleteLast.setBackground(Color.RED);
 		btnDeleteLast.addActionListener(new ActionListener() {
 			// Action Listener for delete will call the delete command to delete
@@ -106,7 +105,7 @@ public class GUI {
 		});
 		panel.add(btnDeleteLast);
 		// Setup the find button.
-		btnFind = new JButton("Find");
+		JButton btnFind = new JButton("Find");
 		btnFind.addActionListener(new ActionListener() {
 			// Action Listener for find takes the current text in the text field
 			// and displays information about that system if said system exists
@@ -167,8 +166,10 @@ public class GUI {
 		m.save("Save", textArea.getText());
 
 	}
+
 	/**
 	 * Appens the given Strings to the list
+	 * 
 	 * @param values
 	 */
 	protected void append(String[] values) {
