@@ -65,8 +65,8 @@ public class Mapper {
 			throw new InvalidSystemException("No Such System" + s);
 		Solarsystem sys = systems.get(s);
 		values[2] = Long.toString((sys.getID()));
-		values[3] = Long.toString(sys.getCon().getID());
-		values[4] = Long.toString(sys.getRegion().getID());
+		values[3] = Long.toString(sys.getCon());
+		values[4] = Long.toString(sys.getRegion());
 		gui.append(values);
 		write(values);
 	}
@@ -126,8 +126,6 @@ public class Mapper {
 	private void load() {
 		Loader l = new Loader();
 		gui.append(l.load());
-		l.loadRegions();
-		l.loadCons();
 		systems = l.loadSystems();
 	}
 	/**
@@ -143,8 +141,8 @@ public class Mapper {
 			throw new InvalidSystemException("No Such System" + string);
 		Solarsystem sys = systems.get(string);
 		values[1] = Long.toString((sys.getID()));
-		values[2] = Long.toString(sys.getCon().getID());
-		values[3] = Long.toString(sys.getRegion().getID());
+		values[2] = Long.toString(sys.getCon());
+		values[3] = Long.toString(sys.getRegion());
 		return values;	
 	}
 

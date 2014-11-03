@@ -1,26 +1,26 @@
 package mapper;
 
 public class Solarsystem {
-	private final Region region;
-	private final Constellation con;
+	private final long region;
+	private final long con;
 	private final long ID;
 	private final String name;
-	public Solarsystem(Region r, Constellation c, long i, String n){
-		region  =r;
-		con = c;
-		ID = i;
-		name = n;
+	public Solarsystem(long region2, long con2, long id, String name){
+		this.region  =region2;
+		con = con2;
+		ID = id;
+		this.name = name;
 	}
 	/**
 	 * @return the region
 	 */
-	Region getRegion() {
+	long getRegion() {
 		return region;
 	}
 	/**
 	 * @return the con
 	 */
-	Constellation getCon() {
+	long getCon() {
 		return con;
 	}
 	/**

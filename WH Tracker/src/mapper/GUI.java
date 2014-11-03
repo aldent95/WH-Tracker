@@ -135,7 +135,10 @@ public class GUI {
 			tempText = textArea.getText();
 			stdDisplay = false;
 		}
-		// TODO Make a method for this
+		else if (!stdDisplay) {
+			stdDisplay = true;
+			textArea.setText(tempText);
+		}
 		String line = values[0] + "\t" + values[1] + "\t" + values[2] + "\t\t"
 				+ values[3];
 		textArea.setText(line + "\n");
@@ -150,6 +153,7 @@ public class GUI {
 			stdDisplay = true;
 			textArea.setText(tempText);
 		}
+		
 		// To remove the last entry we get the current lines, then redisplay the
 		// new lines minus the first 2 lines. (Line 1 is the header, Line 2 is
 		// the one we want to remove)
