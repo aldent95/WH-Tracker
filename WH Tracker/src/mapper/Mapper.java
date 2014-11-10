@@ -15,7 +15,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 public class Mapper {
-	private HashMap<String, Solarsystem> systems;
+	private HashMap<String, Long[]> systems;
 	private GUI gui;
 
 	public Mapper() {
@@ -63,10 +63,10 @@ public class Mapper {
 		values[1] = s;
 		if (!systems.containsKey(s))
 			throw new InvalidSystemException("No Such System" + s);
-		Solarsystem sys = systems.get(s);
-		values[2] = Long.toString((sys.getID()));
-		values[3] = Long.toString(sys.getCon());
-		values[4] = Long.toString(sys.getRegion());
+		Long[] sys = systems.get(s);
+		values[2] = Long.toString(sys[2]);
+		values[3] = Long.toString(sys[1]);
+		values[4] = Long.toString(sys[0]);
 		gui.append(values);
 		write(values);
 	}
@@ -139,10 +139,10 @@ public class Mapper {
 		values[0] = string;
 		if (!systems.containsKey(string))
 			throw new InvalidSystemException("No Such System" + string);
-		Solarsystem sys = systems.get(string);
-		values[1] = Long.toString((sys.getID()));
-		values[2] = Long.toString(sys.getCon());
-		values[3] = Long.toString(sys.getRegion());
+		Long[] sys = systems.get(string);
+		values[2] = Long.toString(sys[2]);
+		values[3] = Long.toString(sys[1]);
+		values[4] = Long.toString(sys[0]);
 		return values;	
 	}
 

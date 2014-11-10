@@ -10,7 +10,7 @@ import java.util.HashMap;
 //TODO Look into a total redo of this
 //This is really a mess. Ill comment what I can but it does need a cleanup
 public class Loader {
-	private HashMap<String, Solarsystem> systems = new HashMap<String, Solarsystem>();
+	private HashMap<String, Long[]> systems = new HashMap<String, Long[]>();
 	/**
 	 * Starts the initial load
 	 * @return Returns the contents of the save file.
@@ -37,7 +37,7 @@ public class Loader {
 	 * Loads all the Systems from file
 	 * @return
 	 */
-	HashMap<String, Solarsystem> loadSystems() {
+	HashMap<String, Long[]> loadSystems() {
 		InputStream file = getClass().getResourceAsStream(
 				"/files/WHSystems.txt");
 		BufferedReader data;
@@ -51,9 +51,10 @@ public class Loader {
 				String[] values = line.split("\t");
 				long region = Long.parseLong(values[0]);
 				long con = Long.parseLong(values[1]);
-				Solarsystem s = new Solarsystem(region,
-						con, Long.parseLong(values[2]),
-						values[3]);
+				Long[] s = new Long[3];
+				s[0] = region;
+				s[1] = con;
+				s[2] = Long.parseLong(values[2]);
 				systems.put(values[3], s);
 
 			}
